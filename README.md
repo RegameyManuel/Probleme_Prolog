@@ -1,5 +1,5 @@
 # Probleme_Prolog
-Problème dit d'Einstein et sa résolution à l'aide d'un programme SWI-Prolog
+Problème dit d'Einstein (probablement du pipeau) et sa résolution à l'aide d'un programme SWI-Prolog
 
 Il y a cinq maisons de cinq couleurs différentes, alignées le long d'une route. Dans chacune de ces maisons vit une personne de nationalité différente. Chacune de ces personnes boit une boisson différente, fume une marque de cigare différente et a un animal domestique différent.
 
