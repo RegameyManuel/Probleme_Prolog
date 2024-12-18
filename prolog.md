@@ -1,5 +1,3 @@
-Ci-dessous, vous trouverez un cours complet vous permettant de comprendre et de travailler avec une version de Prolog compatible avec le code précédemment présenté. Ce cours prendra SWI-Prolog comme référence, car c’est une implémentation très répandue et moderne de Prolog, largement utilisée, maintenue, et offrant de nombreuses bibliothèques utiles (dont certaines utilisées dans le code analysé).
-
 ## Introduction à Prolog
 
 Prolog est un langage de programmation logique. Au lieu de décrire la manière de résoudre un problème (approche impérative), on décrit les relations entre les faits et les règles, puis on interroge le système. Prolog s’occupe de la résolution par un processus appelé « résolution par retour sur trace » (backtracking).
@@ -10,14 +8,14 @@ Prolog est un langage de programmation logique. Au lieu de décrire la manière 
   *Exemple :*  
   
   ```prolog
-  homme(socrate).
-  mortel(X) :- homme(X).
+  pigeon(socrate).
+  mortel(X) :- pigeon(X).
   ```
   
   Ces deux lignes indiquent :  
   
-  - `homme(socrate).` est un fait : Socrate est un homme.
-  - `mortel(X) :- homme(X).` est une règle : X est mortel s’il est un homme.
+  - `pigeon(socrate).` est un fait : Socrate est un pigeon.
+  - `mortel(X) :- pigeon(X).` est une règle : X est mortel s’il est un pigeon.
 
 - **Interrogations** : Pour poser une question (une requête), on tape quelque chose comme :  
   
@@ -36,10 +34,11 @@ Prolog est un langage de programmation logique. Au lieu de décrire la manière 
 ## Installation et utilisation de SWI-Prolog
 
 - **Installation** :  
-  
-  - Sur Linux (Debian/Ubuntu) : `sudo apt-get install swi-prolog`
-  - Sur macOS avec Homebrew : `brew install swi-prolog`
-  - Sur Windows, un exécutable est disponible sur le site officiel : [https://www.swi-prolog.org/Download.html](https://www.swi-prolog.org/Download.html)
+
+ ```bash
+  sudo apt-get install swi-prolog
+ ```
+
 
 - **Lancement** :  
   Tapez `swipl` dans un terminal ou double-cliquez sur l’icône du programme. Vous obtiendrez le prompt Prolog :  
@@ -67,25 +66,25 @@ Prolog est un langage de programmation logique. Au lieu de décrire la manière 
    Un fait décrit une vérité de base, par exemple :  
    
    ```prolog
-   aime(pierre, chocolat).
+   aime(socrate, chocolat).
    ```
    
-   indique que `pierre` aime le `chocolat`.
+   indique que `socrate` aime le `chocolat`.
 
 2. **Règles** :  
    Une règle se compose d’une tête et d’un corps séparés par le symbole `:-`.  
    
    ```prolog
-   aime(X, bonbon) :- enfant(X).
+   aime(X, pain) :- pigeon(X).
    ```
    
-   signifie « X aime les bonbons si X est un enfant ».
+   signifie « X aime le pain si X est un pigeon ».
 
 3. **Requêtes** :  
    Une fois les faits et règles chargés, vous pouvez interroger :  
    
    ```prolog
-   ?- aime(pierre, chocolat).
+   ?- aime(socrate, chocolat).
    ```
    
    Si c’est vrai, Prolog répondra `true.`. Sinon `false.`  
@@ -115,28 +114,6 @@ Prolog est un langage de programmation logique. Au lieu de décrire la manière 
    - `\==` : test strict de différence sans unification.
    - `=..` : décompose un terme en liste `[Functeur|Arguments]`.
 
-## Spécificités utilisées dans le code donné
-
-Dans le code fourni dans votre question initiale, on voit l’utilisation de prédicats tels que `nth1/3`, `writeln/1`, ainsi que la déclaration de listes de structures `maison(...)`.
-
-- **Structures (Termes complexes)** :  
-  Une structure comme `maison(Couleur, Nationalité, Animal, Boisson, Cigare)` est un terme complexe. On peut faire correspondre ou unifier des structures partiellement instanciées.  
-  Ex : `maison(rouge, anglais, _, _, _)` unifiera avec toute maison dont la couleur est rouge et l’habitant anglais, quels que soient les autres champs.
-
-- **nth1/3** :  
-  Ce prédicat est disponible par défaut dans SWI-Prolog (dans le module `lists`). `nth1(N, Liste, Elément)` unifie `Elément` avec le N-ième élément de `Liste` en comptant à partir de 1.  
-  Exemple :  
-  
-  ```prolog
-  ?- nth1(2, [a,b,c], X).
-  X = b.
-  ```
-
-- **writeln/1** :  
-  `writeln/1` est aussi fourni par SWI-Prolog. Il affiche un terme avec un retour à la ligne. C’est pratique pour déboguer ou afficher des résultats.
-
-- **appartient_a/2, a_gauche_de/3, a_cote_de/3** :  
-  Ces prédicats sont définis dans le code. Ils montrent l’utilisation de la récursion pour parcourir les listes. Ce sont des exemples classiques de motifs récurrents en Prolog.
 
 ## Bonnes pratiques
 
@@ -166,22 +143,7 @@ Dans le code fourni dans votre question initiale, on voit l’utilisation de pr�
    ```
    
    Puis on peut importer ce module dans un autre fichier.
-
-## Exemple de session de travail avec le code présenté
-
-Supposons que vous ayez copié le code du puzzle (appelons ce fichier `maisons.pl`). Vous pouvez le charger dans SWI-Prolog :
-
-```prolog
-?- [maisons].
-```
-
-Si le code est correct, Prolog charge le fichier sans erreur. Ensuite, vous pouvez poser la requête de solution :
-
-```prolog
-?- solution.
-```
-
-Prolog tentera alors de trouver une solution qui satisfait toutes les contraintes. Si une solution est trouvée, elle sera affichée dans la console grâce à `afficher_liste(MAISONS)`.
+   
 
 ## Ressources complémentaires
 
@@ -189,25 +151,7 @@ Prolog tentera alors de trouver une solution qui satisfait toutes les contrainte
   [https://www.swi-prolog.org/pldoc/](https://www.swi-prolog.org/pldoc/)  
   Vous y trouverez la description de tous les prédicats intégrés, les modules, et les fonctionnalités avancées.
 
-- **Tutoriels et livres** :
-  
-  - “Learn Prolog Now!” (gratuit en ligne)
-  - “Programming in Prolog” (Clocksin & Mellish)
-  - “The Art of Prolog” (Sterling & Shapiro)
-
 - **Communauté** :  
   
   - Forum SWI-Prolog : [https://swi-prolog.discourse.group/](https://swi-prolog.discourse.group/)  
-  - Stack Overflow (avec le tag `prolog`)
 
-## Conclusion
-
-Avec les connaissances de base exposées ci-dessus, vous êtes en mesure :
-
-- D’installer et de lancer SWI-Prolog.
-- De charger des programmes Prolog, incluant ceux contenant des structures comme `maison(...)`.
-- De comprendre et manipuler les listes, les faits, les règles.
-- D’utiliser des prédicats intégrés utiles (`nth1`, `member`, `writeln`) et de déboguer votre code.
-- De poser des requêtes et d’afficher des solutions.
-
-Ce cours devrait vous donner une base solide pour comprendre et modifier le code présenté précédemment, ainsi que pour développer vos propres programmes en Prolog.
