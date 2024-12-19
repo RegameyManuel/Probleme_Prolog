@@ -1,0 +1,13 @@
+Dans la première version (sans filtrage) :
+
+    On génère et teste toutes les permutations pour chaque catégorie (couleurs, nationalités, boissons, cigares, animaux), soit 5! = 120 permutations par catégorie.
+    Le nombre total de combinaisons est :
+    120×120×120×120×120=1205=24 883 200 000120×120×120×120×120=1205=24883200000 combinaisons.
+    Pour chacune de ces combinaisons, on exécute la boucle 5 fois.
+    Total : 24 883 200 000×5≈124 416 000 00024883200000×5≈124416000000 passages dans cette boucle (ce qui est gigantesque).
+
+Dans la seconde version (avec filtrage) :
+
+    On applique certaines contraintes pour filtrer les permutations avant la grande boucle.
+    Par exemple, imposer que le Norvégien soit dans la première maison réduit fortement les permutations de nationalités à 24. De même, la maison du centre qui boit du lait, la maison verte immédiatement à gauche de la blanche, etc., réduisent le nombre de permutations.
+    Même avec ces optimisations, on teste toujours un grand nombre de combinaisons, mais beaucoup moins que dans la version brute. Par exemple, on peut estimer l’ordre de grandeur autour de quelques centaines de millions au lieu de plusieurs dizaines de milliards.
